@@ -1,6 +1,6 @@
-import mongoose, { model } from 'mongoose';
+import { model, Schema } from 'mongoose';
 
-const contactsSchema = new mongoose.Schema(
+const contactsSchema = new Schema(
   {
     name: {
       type: String,
@@ -14,7 +14,7 @@ const contactsSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
-    isFavourite: {
+    isFavorite: {
       type: Boolean,
       required: true,
       default: false,
@@ -26,7 +26,7 @@ const contactsSchema = new mongoose.Schema(
       required: true,
     },
   },
-  { timestamps: true },
+  { timestamps: true, versionKey: false },
 );
 
 export const ContactsCollection = model('contacts', contactsSchema);
