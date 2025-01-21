@@ -2,7 +2,7 @@ import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
 import { getEnvVar } from '../src/utils/getEnvVar.js';
-import { getAllStudents, getStudentById } from '../src/services/students.js';
+import { getAllContacts, getContactsById } from './services/contacts.js';
 
 const PORT = Number(getEnvVar('PORT', '3000'));
 
@@ -19,28 +19,35 @@ export const setupServer = () => {
       },
     }),
   );
-
-  app.get('/students', async (req, res) => {
-    const students = await getAllStudents();
-
-    res.status(200).json({
-      data: students,
+  app.get('/', (req, res) => {
+    res.json({
+      message: 'Hello world!',
     });
   });
 
-  app.get('/students/:studentId', async (req, res, next) => {
-    const { studentId } = req.params;
-    const student = await getStudentById(studentId);
+  app.get('/contacts', async (req, res) => {
+    const contacts = await getAllContacts();
 
-    if (!student) {
+    res.status(200).json({
+      message: 'Successfully found contacts!',
+      data: contacts,
+    });
+  });
+
+  app.get('/contacts/:contactId', async (req, res, next) => {
+    const { contactId } = req.params;
+    const contact = await getContactsById(contactId);
+
+    if (!contact) {
       res.status(404).json({
-        message: 'Student not found',
+        message: 'Contact not found',
       });
       return;
     }
 
     res.status(200).json({
-      data: student,
+      message: 'Successfully found contact with id {contactId}!',
+      data: contact,
     });
   });
 
