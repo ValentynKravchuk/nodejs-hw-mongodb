@@ -1,6 +1,6 @@
 import mongoose, { model } from 'mongoose';
 
-const studentsSchema = new mongoose.Schema(
+const contactsSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -29,4 +29,4 @@ const studentsSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-export const StudentsCollection = model('students', studentsSchema);
+export const contactsCollection = model('contacts', contactsSchema);
