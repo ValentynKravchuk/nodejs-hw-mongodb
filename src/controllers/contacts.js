@@ -51,7 +51,7 @@ export const patchContactController = async (req, res, next) => {
     data: result.contact,
   });
 };
-export const upsertStudentController = async (req, res, next) => {
+export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
   const result = await createContact(contactId, req.body, {
     upsert: true,
