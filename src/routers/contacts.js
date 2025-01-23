@@ -8,7 +8,7 @@ import {
 } from '../controllers/contacts.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 
-const { Router } = require('express');
+const { Router } = import('express');
 
 const router = Router();
 router.get('/contacts', ctrlWrapper(getContactsController));
