@@ -13,15 +13,15 @@ export const getAllContacts = async ({
   const skip = (page - 1) * perPage;
 
   const contactsQuery = ContactsCollection.find();
-  if (filter.type) {
+  const validTypes = ['work', 'home', 'personal'];
+  if (validTypes.includes(filter.type)) {
     contactsQuery.where('contactType').equals(filter.type);
   }
+
   if (filter.isFavourite !== undefined) {
-    contactsQuery.where('isFavourite').equals(filter.isFavourite);
+    contactsQuery.where('isFavourite').equals(filter.isFavourite === 'true');
   }
-  const contactsCount = await ContactsCollection.find()
-    .merge(contactsQuery)
-    .countDocuments();
+  const contactsCount = await contactsQuery.clone().countDocuments();
 
   const contacts = await contactsQuery
     .skip(skip)
@@ -29,7 +29,12 @@ export const getAllContacts = async ({
     .sort({ [sortBy]: sortOrder })
     .exec();
 
-  const paginationData = calculatePaginationData(contactsCount, perPage, page);
+  const paginationData = calculatePaginationData(
+    contacts,
+    contactsCount,
+    perPage,
+    page,
+  );
 
   return {
     data: contacts,
