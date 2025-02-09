@@ -12,7 +12,7 @@ const usersSchema = new Schema(
       default: ROLES.PARENT,
     },
   },
-  { timeseries: true, versionKey: false },
+  { timestamps: true, versionKey: false },
 );
 usersSchema.methods.toJSON = function () {
   const obj = this.toObject();
