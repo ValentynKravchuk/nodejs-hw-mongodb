@@ -16,8 +16,10 @@ import {
 import { isValidId } from '../middlewares/isValidId.js';
 import { ROLES } from '../constants/index.js';
 import { checkRoles } from '../middlewares/checkRoles.js';
+import { authenticate } from '../middlewares/authenticate.js';
 
 const router = Router();
+router.use(authenticate);
 router.get('/', checkRoles(ROLES.TEACHER), ctrlWrapper(getContactsController));
 
 router.get(
