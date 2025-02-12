@@ -68,13 +68,12 @@ export const patchContactController = async (req, res, next) => {
 };
 export const upsertContactController = async (req, res, next) => {
   const { contactId } = req.params;
-  const result = await createContact(contactId, req.body, req.user._id, {
+  const result = await updateContact(contactId, req.body, req.user._id, {
     upsert: true,
   });
 
   if (!result) {
-    next(createHttpError(404, 'Contact not found'));
-    return;
+    return next(createHttpError(404, 'Contact not found'));
   }
 
   const status = result.isNew ? 201 : 200;
@@ -82,7 +81,7 @@ export const upsertContactController = async (req, res, next) => {
   res.status(status).json({
     status,
     message: `Successfully upserted a contact!`,
-    data: result.contact,
+    data: result,
   });
 };
 

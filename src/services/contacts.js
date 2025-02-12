@@ -13,7 +13,7 @@ export const getAllContacts = async ({
   const limit = perPage;
   const skip = (page - 1) * perPage;
 
-  const contactsQuery = ContactsCollection.find({ userId });
+  const contactsQuery = ContactsCollection.find();
 
   const validTypes = ['work', 'home', 'personal'];
   if (validTypes.includes(filter.type)) {
@@ -77,7 +77,7 @@ export const updateContact = async (
   };
 };
 export const deleteContact = async (contactId, userId) => {
-  const contact = await ContactsCollection.findByIdAndDelete({
+  const contact = await ContactsCollection.findByOneAndDelete({
     _id: contactId,
     userId,
   });
