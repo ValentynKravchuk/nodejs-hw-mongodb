@@ -36,7 +36,7 @@ router.use(authenticate);
 
 router.get('/', ctrlWrapper(getContactsController));
 router.post(
-  '/request-reset-email',
+  '/send-reset-email',
   validateBody(requestResetEmailSchema),
   ctrlWrapper(requestResetEmailController),
 );
