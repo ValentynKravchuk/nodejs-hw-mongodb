@@ -234,11 +234,6 @@
                     "type": "boolean",
                     "example": false
                   },
-                  "userId": {
-                    "description": "Contact user id",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
-                  },
                   "photo": {
                     "description": "Contact photo",
                     "type": "string",
@@ -409,11 +404,6 @@
                     "type": "boolean",
                     "example": false
                   },
-                  "userId": {
-                    "description": "Contact user id",
-                    "type": "string",
-                    "example": "65e4decdd286b30065d54af9"
-                  },
                   "photo": {
                     "description": "Contact photo",
                     "type": "string",
@@ -486,7 +476,7 @@
           }
         ],
         "responses": {
-          "200": {
+          "204": {
             "description": "Delete contact"
           },
           "401": {
